@@ -26,5 +26,13 @@ Tower Defense is a game where you prevent the balloons from reaching the end of 
 
 - Canvas Api
 
-## Wireframes
+## To-Do
+
+Day 1: Functional splash page and game start, balloons get stronger over time
+
+Day 2: Towers can be purchased, placed, and can shoot balloons
+
+Day 3: Towers can be upgraded
+
+
 
