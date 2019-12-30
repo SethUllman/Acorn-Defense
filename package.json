@@ -1,0 +1,34 @@
+{
+  "name": "Tower-Defense",
+  "version": "1.0.0",
+  "description": "Tower Defense is a game where you prevent the balloons from reaching the end of the track by purchasing towers to pop them.",
+  "main": "index.jsx",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "webpack --mode=development --watch",
+    "serve": "webpack-dev-server --inline --colors --watch --display-error-details --display-cached  --port 3000 --hot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SethUllman/Tower-Defense.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SethUllman/Tower-Defense/issues"
+  },
+  "homepage": "https://github.com/SethUllman/Tower-Defense#readme",
+  "dependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/preset-react": "^7.7.4",
+    "babel-loader": "^8.0.6",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-router-dom": "^5.1.2",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1"
+  }
+}

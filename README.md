@@ -34,5 +34,10 @@ Day 2: Towers can be purchased, placed, and can shoot balloons
 
 Day 3: Towers can be upgraded
 
+## Wire Frames
 
+Game splash page
+![Splash Page](/assets/wireframes/SplashPage.png)
 
+Play Area
+![Play Area](/assets/wireframes/Game.png)
