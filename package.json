@@ -5,8 +5,7 @@
   "main": "index.jsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack": "webpack --mode=development --watch",
-    "serve": "webpack-dev-server --inline --colors --watch --display-error-details --display-cached  --port 3000 --hot"
+    "webpack": "webpack --mode=development --watch"
   },
   "repository": {
     "type": "git",
@@ -27,6 +26,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.3.0",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.10.1"

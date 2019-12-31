@@ -1,0 +1,12 @@
+.game{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.play-area{
+  height: 100vh;
+  width: 130vh;
+  background: url('../images/Map.jpg') no-repeat;
+  background-size: cover;
+}

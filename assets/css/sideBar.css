@@ -1,0 +1,6 @@
+.side-bar{
+  background: url('../images/SideBar.jpg') no-repeat;
+  background-size: cover;
+  width: 26vw;
+  right: 0;
+}
