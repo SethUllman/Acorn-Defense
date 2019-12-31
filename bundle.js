@@ -137,6 +137,13 @@ function (_React$Component) {
   }
 
   _createClass(App, [{
+    key: "returnSplash",
+    value: function returnSplash() {
+      this.setState({
+        splash: true
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -155,7 +162,9 @@ function (_React$Component) {
           }
         }, "Play"));
       } else {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_lib_components_game__WEBPACK_IMPORTED_MODULE_1__["default"], null);
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_lib_components_game__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          returnSplash: this.returnSplash
+        });
       }
     }
   }]);
@@ -213,9 +222,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -228,20 +237,51 @@ var Game =
 function (_React$Component) {
   _inherits(Game, _React$Component);
 
-  function Game() {
+  function Game(props) {
+    var _this;
+
     _classCallCheck(this, Game);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Game).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Game).call(this, props));
+    _this.draw = _this.draw.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(Game, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var canvas = this.refs.canvas;
+      this.x = 10;
+      this.y = 10;
+      this.dx = 2;
+      this.dy = -2;
+      this.ctx = canvas.getContext('2d');
+      setInterval(this.draw(), 1000);
+    }
+  }, {
+    key: "draw",
+    value: function draw() {
+      debugger;
+      this.ctx.beginPath();
+      this.ctx.arc(this.x, this.y, 5, 0, Math.PI * 2);
+      this.ctx.fillStyle = "#0095DD";
+      this.ctx.fill();
+      this.ctx.closePath();
+      this.x += this.dx;
+      this.y += this.dy;
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "game"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "play-area"
-      }, "Game"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("canvas", {
+        id: "mycanvas",
+        ref: "canvas",
+        className: "canvas"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "side-bar"
       }, "Store"));
     }

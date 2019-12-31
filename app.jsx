@@ -9,6 +9,10 @@ class App extends React.Component {
     }
   }
 
+  returnSplash(){
+    this.setState({splash: true});
+  }
+
   render(){
     if(this.state.splash){
       return (
@@ -19,7 +23,7 @@ class App extends React.Component {
       )
     } else {
       return (
-        <Game/>
+        <Game returnSplash={this.returnSplash}/>
       )
     }
   }

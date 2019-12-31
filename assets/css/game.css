@@ -6,7 +6,16 @@
 
 .play-area{
   height: 100vh;
-  width: 130vh;
+  width: 75vw;
   background: url('../images/Map.jpg') no-repeat;
-  background-size: cover;
+  background-size: 100% 100%;
+  display: flex;
+  /* border: 1px solid blue; */
+}
+
+.canvas{
+  /* border: 1px solid blue; */
+  width: 200vh;
+  height: 100vh;
+  position: absolute;
 }
