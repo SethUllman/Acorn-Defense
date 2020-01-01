@@ -25,21 +25,39 @@ class Game extends React.Component{
 
   draw(){
     let count = 0;
-    while (count < 400){
+    while (count < 550){
       this.ctx.beginPath();
       this.ctx.arc(this.x, this.y, 5, 0, Math.PI * 2);
       this.ctx.fillStyle = "#0095DD";
       this.ctx.fill();
       // this.ctx.drawImage(this.bird, 10, 10);
       this.ctx.closePath();
-      if ( this.y === 106 && this.x < 33){
+      if (count < 43){
         this.x += 1;
-      } else if (this.x === 33 && this.y > 81){
+      } else if (count > 42 && count < 68){
         this.y -= 1;
-      } else if (this.y === 82 && this.x < 60){
+      } else if (count > 67 && count < 94){
         this.x += 1;
-      } else if (this.x === 59 && this.y > 41){
+      } else if (count > 93 && count < 144){
         this.y += 1;
+      } else if (count > 143 && count < 184){
+        this.x += 1;
+      } else if (count > 183 && count < 221){
+        this.y -= 1;
+      } else if (count > 220 && count < 261){
+        this.x += 1;
+      } else if ( count > 260 && count < 299){
+        this.y -= 1;
+      } else if ( count > 298 && count < 326){
+        this.x -= 1;
+      } else if ( count > 325 && count < 338){
+        this.y -= 1;
+      } else if ( count > 337 && count < 404){
+        this.x -= 1;
+      } else if ( count > 403 && count < 429){
+        this.y -= 1;
+      } else if ( count > 428 && count < 536){
+        this.x += 1;
       }
       
       count += 1;
