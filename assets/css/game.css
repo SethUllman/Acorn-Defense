@@ -1,3 +1,9 @@
+.blue_bird {
+  position: absolute;
+  width: 70px;
+  height: 55px;
+}
+
 .game{
   display: flex;
   flex-direction: row;

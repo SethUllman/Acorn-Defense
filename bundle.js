@@ -153,7 +153,7 @@ function (_React$Component) {
           className: "splash"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "splash-welcome"
-        }, "Tower Defense!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, "Acorn Defense!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "splash-play",
           onClick: function onClick() {
             _this2.setState({
@@ -212,6 +212,7 @@ document.addEventListener("DOMContentLoaded", function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ */ "./index.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -229,6 +230,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -250,25 +252,44 @@ function (_React$Component) {
   _createClass(Game, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      debugger;
+      this.bird = new Image();
+      this.bird.src = '../../assets/sprites/blue_bird/blue_bird.png';
       var canvas = this.refs.canvas;
-      this.x = 10;
-      this.y = 10;
-      this.dx = 2;
-      this.dy = -2;
+      this.x = -10;
+      this.y = 106;
+      this.dx = 1;
+      this.dy = 1;
       this.ctx = canvas.getContext('2d');
       setInterval(this.draw(), 1000);
     }
   }, {
     key: "draw",
     value: function draw() {
-      debugger;
-      this.ctx.beginPath();
-      this.ctx.arc(this.x, this.y, 5, 0, Math.PI * 2);
-      this.ctx.fillStyle = "#0095DD";
-      this.ctx.fill();
-      this.ctx.closePath();
-      this.x += this.dx;
-      this.y += this.dy;
+      var count = 0;
+
+      while (count < 400) {
+        this.ctx.beginPath();
+        this.ctx.arc(this.x, this.y, 5, 0, Math.PI * 2);
+        this.ctx.fillStyle = "#0095DD";
+        this.ctx.fill(); // this.ctx.drawImage(this.bird, 10, 10);
+
+        this.ctx.closePath();
+
+        if (this.y === 106 && this.x < 33) {
+          this.x += 1;
+        } else if (this.x === 33 && this.y > 81) {
+          this.y -= 1;
+        } else if (this.y === 82 && this.x < 60) {
+          this.x += 1;
+        } else if (this.x === 59 && this.y > 41) {
+          this.y += 1;
+        }
+
+        count += 1;
+      }
+
+      ;
     }
   }, {
     key: "render",

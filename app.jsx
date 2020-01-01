@@ -17,7 +17,7 @@ class App extends React.Component {
     if(this.state.splash){
       return (
         <div className='splash'>
-          <div className='splash-welcome'>Tower Defense!</div>
+          <div className='splash-welcome'>Acorn Defense!</div>
           <div className='splash-play' onClick={() => {this.setState({splash:false})}}>Play</div>
         </div>
       )
