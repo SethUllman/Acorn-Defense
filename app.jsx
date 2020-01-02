@@ -1,5 +1,6 @@
 import React from 'react';
 import Game from './lib/components/game';
+import birdPath from './lib/components/birdPath.js';
 
 class App extends React.Component {
   constructor(props){
@@ -23,7 +24,7 @@ class App extends React.Component {
       )
     } else {
       return (
-        <Game returnSplash={this.returnSplash}/>
+        Game(birdPath)
       )
     }
   }

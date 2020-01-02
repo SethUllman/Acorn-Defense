@@ -98,6 +98,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _lib_components_game__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib/components/game */ "./lib/components/game.jsx");
+/* harmony import */ var _lib_components_birdPath_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./lib/components/birdPath.js */ "./lib/components/birdPath.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -115,6 +116,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -162,9 +164,7 @@ function (_React$Component) {
           }
         }, "Play"));
       } else {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_lib_components_game__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          returnSplash: this.returnSplash
-        });
+        return Object(_lib_components_game__WEBPACK_IMPORTED_MODULE_1__["default"])(_lib_components_birdPath_js__WEBPACK_IMPORTED_MODULE_2__["default"]);
       }
     }
   }]);
@@ -201,6 +201,82 @@ document.addEventListener("DOMContentLoaded", function () {
 
 /***/ }),
 
+/***/ "./lib/components/birdPath.js":
+/*!************************************!*\
+  !*** ./lib/components/birdPath.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// import React from 'react';
+//try without using a react component
+var birdPath = function birdPath() {
+  debugger;
+  var bird = new Image();
+  bird.src = '../../assets/sprites/blue_bird/blue_bird.png';
+  var x = -10;
+  var y = 106;
+  var count = 0;
+
+  var draw = function draw() {
+    var canvas = document.getElementById("Canvas");
+    var ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (count < 550) {
+      ctx.beginPath();
+      ctx.arc(x, y, 5, 0, Math.PI * 2);
+      ctx.fillStyle = "#0095DD";
+      ctx.fill(); // this.ctx.drawImage(this.bird, 10, 10);
+
+      ctx.closePath();
+
+      if (count < 43) {
+        x += 1;
+      } else if (count > 42 && count < 68) {
+        y -= 1;
+      } else if (count > 67 && count < 94) {
+        x += 1;
+      } else if (count > 93 && count < 144) {
+        y += 1;
+      } else if (count > 143 && count < 184) {
+        x += 1;
+      } else if (count > 183 && count < 221) {
+        y -= 1;
+      } else if (count > 220 && count < 261) {
+        x += 1;
+      } else if (count > 260 && count < 299) {
+        y -= 1;
+      } else if (count > 298 && count < 326) {
+        x -= 1;
+      } else if (count > 325 && count < 338) {
+        y -= 1;
+      } else if (count > 337 && count < 404) {
+        x -= 1;
+      } else if (count > 403 && count < 429) {
+        y -= 1;
+      } else if (count > 428 && count < 536) {
+        x += 1;
+      }
+
+      count += 1;
+    }
+
+    ;
+  };
+
+  setInterval(function () {
+    console.log('Interval');
+    draw();
+  }, 50);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (birdPath);
+
+/***/ }),
+
 /***/ "./lib/components/game.jsx":
 /*!*********************************!*\
   !*** ./lib/components/game.jsx ***!
@@ -212,122 +288,18 @@ document.addEventListener("DOMContentLoaded", function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ */ "./index.jsx");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
-
-
-var Game =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(Game, _React$Component);
-
-  function Game(props) {
-    var _this;
-
-    _classCallCheck(this, Game);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Game).call(this, props));
-    _this.draw = _this.draw.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-
-  _createClass(Game, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      debugger;
-      this.bird = new Image();
-      this.bird.src = '../../assets/sprites/blue_bird/blue_bird.png';
-      var canvas = this.refs.canvas;
-      this.x = -10;
-      this.y = 106;
-      this.dx = 1;
-      this.dy = 1;
-      this.ctx = canvas.getContext('2d');
-      setInterval(this.draw(), 1000);
-    }
-  }, {
-    key: "draw",
-    value: function draw() {
-      var count = 0;
-
-      while (count < 550) {
-        this.ctx.beginPath();
-        this.ctx.arc(this.x, this.y, 5, 0, Math.PI * 2);
-        this.ctx.fillStyle = "#0095DD";
-        this.ctx.fill(); // this.ctx.drawImage(this.bird, 10, 10);
-
-        this.ctx.closePath();
-
-        if (count < 43) {
-          this.x += 1;
-        } else if (count > 42 && count < 68) {
-          this.y -= 1;
-        } else if (count > 67 && count < 94) {
-          this.x += 1;
-        } else if (count > 93 && count < 144) {
-          this.y += 1;
-        } else if (count > 143 && count < 184) {
-          this.x += 1;
-        } else if (count > 183 && count < 221) {
-          this.y -= 1;
-        } else if (count > 220 && count < 261) {
-          this.x += 1;
-        } else if (count > 260 && count < 299) {
-          this.y -= 1;
-        } else if (count > 298 && count < 326) {
-          this.x -= 1;
-        } else if (count > 325 && count < 338) {
-          this.y -= 1;
-        } else if (count > 337 && count < 404) {
-          this.x -= 1;
-        } else if (count > 403 && count < 429) {
-          this.y -= 1;
-        } else if (count > 428 && count < 536) {
-          this.x += 1;
-        }
-
-        count += 1;
-      }
-
-      ;
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "game"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "play-area"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("canvas", {
-        id: "mycanvas",
-        ref: "canvas",
-        className: "canvas"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "side-bar"
-      }, "Store"));
-    }
-  }]);
-
-  return Game;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+var Game = function Game(birdPath) {
+  birdPath();
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "game"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "play-area"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "side-bar"
+  }, "Store"));
+};
 
 /* harmony default export */ __webpack_exports__["default"] = (Game);
 

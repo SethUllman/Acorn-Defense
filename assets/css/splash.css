@@ -28,6 +28,7 @@
   font-size: 36px;
   background: #35A6FF;
   cursor: pointer;
+  z-index: 5;
 }
 
 
