@@ -1,6 +1,6 @@
 import React from 'react';
 import Store from './store';
-import placement from './placement';
+import squirrel from './squirrel';
 
 const Game = (bird) => {
   const height = window.screen.height;
@@ -37,7 +37,7 @@ const Game = (bird) => {
         }} >Next Round</div>
         <div className='round_counter'>{round}</div>
       </div>
-      <Store money={money} health={health} round={round} placement={placement}/>
+      <Store money={money} health={health} round={round} squirrel={squirrel}/>
     </div>
   );
   

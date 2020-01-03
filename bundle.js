@@ -293,7 +293,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store */ "./lib/components/store.jsx");
-/* harmony import */ var _placement__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./placement */ "./lib/components/placement.js");
+/* harmony import */ var _squirrel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./squirrel */ "./lib/components/squirrel.js");
 
 
 
@@ -344,7 +344,7 @@ var Game = function Game(bird) {
     money: money,
     health: health,
     round: round,
-    placement: _placement__WEBPACK_IMPORTED_MODULE_2__["default"]
+    squirrel: _squirrel__WEBPACK_IMPORTED_MODULE_2__["default"]
   }));
 };
 
@@ -352,31 +352,47 @@ var Game = function Game(bird) {
 
 /***/ }),
 
-/***/ "./lib/components/placement.js":
-/*!*************************************!*\
-  !*** ./lib/components/placement.js ***!
-  \*************************************/
+/***/ "./lib/components/squirrel.js":
+/*!************************************!*\
+  !*** ./lib/components/squirrel.js ***!
+  \************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var placement = function placement() {
+var squirrel = function squirrel() {
+  var squirrels = [];
+  var height = window.screen.height;
+  var width = window.screen.width;
+  var squirrel = document.getElementById("squirrel");
+  var squirrelWidth = 6 * width / 100;
+  var squirrelHeight = 8 * height / 100;
+  var canvas = document.getElementById("Canvas");
+  var ctx = canvas.getContext("2d");
+  ctx.imageSmoothingEnabled = false;
+  var count = 0;
+
   var getMousePosition = function getMousePosition(canvas, event) {
+    count += 1;
     var rect = canvas.getBoundingClientRect();
     var x = event.clientX - rect.left;
     var y = event.clientY - rect.top;
-    console.log("Coordinate x: " + x, "Coordinate y: " + y);
-    return x, y;
+    ctx.drawImage(squirrel, x - 40, y - 40, squirrelWidth, squirrelHeight);
+    squirrels.push({
+      id: count,
+      x: x,
+      y: y
+    });
+    console.log(squirrels);
   };
 
-  var canvasElem = document.getElementById("Canvas");
-  canvasElem.addEventListener("mousedown", function (e) {
-    return getMousePosition(canvasElem, e);
+  canvas.addEventListener("mousedown", function (e) {
+    getMousePosition(canvas, e);
   });
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (placement);
+/* harmony default export */ __webpack_exports__["default"] = (squirrel);
 
 /***/ }),
 
@@ -427,7 +443,7 @@ function (_React$Component) {
       health: _this.props.health,
       currentSquirrel: null,
       round: _this.props.round,
-      placement: _this.props.placement
+      squirrel: _this.props.squirrel
     };
     return _this;
   }
@@ -435,7 +451,7 @@ function (_React$Component) {
   _createClass(Store, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.state.placement();
+      this.state.squirrel();
     }
   }, {
     key: "render",

@@ -8,12 +8,12 @@ class Store extends React.Component{
       health: this.props.health,
       currentSquirrel: null,
       round: this.props.round,
-      placement: this.props.placement
+      squirrel: this.props.squirrel
     }
   }
 
   componentDidMount(){
-    this.state.placement();
+    this.state.squirrel();
     
   }
 
