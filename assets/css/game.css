@@ -1,7 +1,8 @@
 .blue_bird {
-  width: 200vh;
-  height: 100vh;
-  position: absolute;
+  /* width: 200vh; */
+  /* height: 100vh; */
+  /* position: absolute; */
+  display: none;
 }
 
 .game{
@@ -21,7 +22,17 @@
 
 .canvas{
   /* border: 1px solid blue; */
-  width: 200vh;
-  height: 100vh;
+  /* width: 200vh; */
+  /* height: 100vh; */
   position: absolute;
+}
+
+.play-button{
+  z-index: 6;
+  cursor: pointer;
+}
+
+.basic_info{
+  display: flex;
+  flex-direction: column;
 }

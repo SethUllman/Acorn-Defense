@@ -98,7 +98,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _lib_components_game__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib/components/game */ "./lib/components/game.jsx");
-/* harmony import */ var _lib_components_birdPath_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./lib/components/birdPath.js */ "./lib/components/birdPath.js");
+/* harmony import */ var _lib_components_bird_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./lib/components/bird.js */ "./lib/components/bird.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -164,7 +164,7 @@ function (_React$Component) {
           }
         }, "Play"));
       } else {
-        return Object(_lib_components_game__WEBPACK_IMPORTED_MODULE_1__["default"])(_lib_components_birdPath_js__WEBPACK_IMPORTED_MODULE_2__["default"]);
+        return Object(_lib_components_game__WEBPACK_IMPORTED_MODULE_1__["default"])(_lib_components_bird_js__WEBPACK_IMPORTED_MODULE_2__["default"]);
       }
     }
   }]);
@@ -201,10 +201,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 /***/ }),
 
-/***/ "./lib/components/birdPath.js":
-/*!************************************!*\
-  !*** ./lib/components/birdPath.js ***!
-  \************************************/
+/***/ "./lib/components/bird.js":
+/*!********************************!*\
+  !*** ./lib/components/bird.js ***!
+  \********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -212,53 +212,58 @@ document.addEventListener("DOMContentLoaded", function () {
 __webpack_require__.r(__webpack_exports__);
 // import React from 'react';
 //try without using a react component
-var birdPath = function birdPath() {
-  debugger;
-  var bird = new Image();
-  bird.src = '../../assets/sprites/blue_bird/blue_bird.png';
-  var x = -10;
-  var y = 106;
+var bird = function bird(speed) {
   var count = 0;
+  var height = window.screen.height;
+  var width = window.screen.width;
+  var x = -10;
+  var y = 61 * height / 100;
+  var birdWidth = 6 * width / 100;
+  var birdHeight = 7 * height / 100;
 
   var draw = function draw() {
-    var canvas = document.getElementById("Canvas");
-    var ctx = canvas.getContext("2d");
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (count < 3000) {
+      var canvas = document.getElementById("Canvas");
+      var ctx = canvas.getContext("2d");
 
-    if (count < 550) {
-      ctx.beginPath();
-      ctx.arc(x, y, 5, 0, Math.PI * 2);
-      ctx.fillStyle = "#0095DD";
-      ctx.fill(); // this.ctx.drawImage(this.bird, 10, 10);
+      var _bird = document.getElementById("blue_bird");
 
-      ctx.closePath();
+      ctx.clearRect(x - 3, y - 3, birdWidth + 6, birdHeight + 5);
+      ctx.imageSmoothingEnabled = false;
+      ctx.drawImage(_bird, x, y, birdWidth, birdHeight);
 
-      if (count < 43) {
-        x += 1;
-      } else if (count > 42 && count < 68) {
-        y -= 1;
-      } else if (count > 67 && count < 94) {
-        x += 1;
-      } else if (count > 93 && count < 144) {
-        y += 1;
-      } else if (count > 143 && count < 184) {
-        x += 1;
-      } else if (count > 183 && count < 221) {
-        y -= 1;
-      } else if (count > 220 && count < 261) {
-        x += 1;
-      } else if (count > 260 && count < 299) {
-        y -= 1;
-      } else if (count > 298 && count < 326) {
-        x -= 1;
-      } else if (count > 325 && count < 338) {
-        y -= 1;
-      } else if (count > 337 && count < 404) {
-        x -= 1;
-      } else if (count > 403 && count < 429) {
-        y -= 1;
-      } else if (count > 428 && count < 536) {
-        x += 1;
+      if (y === 61 * height / 100 && x < 9.5 * width / 100) {
+        x += 4;
+      } else if (x > 9.4 * width / 100 && x < 19 * width / 100 && y > 46 * height / 100) {
+        y -= 4;
+      } else if (y > 45.9 * height / 100 && y < 47 * height / 100 && x < 19.5 * width / 100) {
+        x += 4;
+      } else if (x > 19 * width / 100 && x < 20 * width / 100 && y < 76.5 * height / 100 && y > 40 * height / 100) {
+        // 46 < y < 76.5
+        y += 4;
+      } else if (y > 76 * height / 100 && y < 77 * height / 100 && x < 34.5 * width / 100) {
+        x += 4;
+      } else if (x > 34 * width / 100 && y > 53.5 * height / 100) {
+        y -= 4;
+      } else if (y < 54 * height / 100 && y > 32 * height / 100 && x < 49.5 * width / 100) {
+        x += 4;
+      } else if (x > 49 * width / 100 && x < 50 * width / 100 && y > 31 * height / 100) {
+        y -= 4;
+      } else if (y > 30.5 * height / 100 && x > 39.5 * width / 100) {
+        x -= 4;
+      } else if (x < 40 * width / 100 && y > 23 * height / 100) {
+        y -= 4;
+      } else if (y < 24 * height / 100 && y > 22 * height / 100 && x > 14.5 * width / 100) {
+        // 22 < y < 24
+        x -= 4;
+      } else if (x < 15 * width / 100 && y < 24 * height / 100 && y > 8 * height / 100) {
+        // 8 < y < 24
+        y -= 4;
+      } else if (y < 8.5 * height / 100 && x < 60 * width / 100) {
+        x += 4;
+      } else if (x > 59 * width / 100) {
+        clearInterval(birdInterval);
+        ctx.clearRect(x, y, birdWidth + 1, birdHeight);
       }
 
       count += 1;
@@ -267,13 +272,12 @@ var birdPath = function birdPath() {
     ;
   };
 
-  setInterval(function () {
-    console.log('Interval');
+  var birdInterval = setInterval(function () {
     draw();
-  }, 50);
+  }, speed);
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (birdPath);
+/* harmony default export */ __webpack_exports__["default"] = (bird);
 
 /***/ }),
 
@@ -288,20 +292,184 @@ var birdPath = function birdPath() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store */ "./lib/components/store.jsx");
+/* harmony import */ var _placement__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./placement */ "./lib/components/placement.js");
 
 
-var Game = function Game(birdPath) {
-  birdPath();
+
+
+var Game = function Game(bird) {
+  var height = window.screen.height;
+  var width = window.screen.width;
+  var difficulty = 0;
+  var money = 500;
+  var health = 100;
+  var round = 1;
+  var hitPoints = 1;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "game"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "play-area"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("canvas", {
+    id: "Canvas",
+    className: "canvas",
+    width: width,
+    height: height
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "side-bar"
-  }, "Store"));
+    className: "play-area"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "play-button",
+    onClick: function onClick() {
+      var i = 0;
+
+      if (round % 2 == 0) {
+        hitPoints += 1;
+      } else {
+        difficulty += 5;
+      }
+
+      var play = setInterval(function () {
+        bird(hitPoints);
+        i += 1;
+
+        if (i === difficulty) {
+          clearInterval(play);
+        }
+      }, 1000);
+      round += 1;
+    }
+  }, "Next Round"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "round_counter"
+  }, round)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_store__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    money: money,
+    health: health,
+    round: round,
+    placement: _placement__WEBPACK_IMPORTED_MODULE_2__["default"]
+  }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Game);
+
+/***/ }),
+
+/***/ "./lib/components/placement.js":
+/*!*************************************!*\
+  !*** ./lib/components/placement.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var placement = function placement() {
+  var getMousePosition = function getMousePosition(canvas, event) {
+    var rect = canvas.getBoundingClientRect();
+    var x = event.clientX - rect.left;
+    var y = event.clientY - rect.top;
+    console.log("Coordinate x: " + x, "Coordinate y: " + y);
+    return x, y;
+  };
+
+  var canvasElem = document.getElementById("Canvas");
+  canvasElem.addEventListener("mousedown", function (e) {
+    return getMousePosition(canvasElem, e);
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (placement);
+
+/***/ }),
+
+/***/ "./lib/components/store.jsx":
+/*!**********************************!*\
+  !*** ./lib/components/store.jsx ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var Store =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Store, _React$Component);
+
+  function Store(props) {
+    var _this;
+
+    _classCallCheck(this, Store);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Store).call(this, props));
+    _this.state = {
+      money: _this.props.money,
+      health: _this.props.health,
+      currentSquirrel: null,
+      round: _this.props.round,
+      placement: _this.props.placement
+    };
+    return _this;
+  }
+
+  _createClass(Store, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.state.placement();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "store"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "status"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "money: ", this.state.money), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "health: ", this.state.health)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "squirrels"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "basic_squirrel",
+        onClick: function onClick() {
+          if (_this2.state.money >= 100) {
+            _this2.setState({
+              money: [_this2.state.money - 100],
+              currentSquirrel: 'Basic Squirrel'
+            });
+          }
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "basic_info"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Basic Squirrel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "basic_price"
+      }, "$100")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "basic_squirrel_img"
+      }))));
+    }
+  }]);
+
+  return Store;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Store);
 
 /***/ }),
 
