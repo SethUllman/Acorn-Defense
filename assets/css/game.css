@@ -5,6 +5,10 @@
   display: none;
 }
 
+.squirrel {
+  display: none;
+}
+
 .game{
   display: flex;
   flex-direction: row;

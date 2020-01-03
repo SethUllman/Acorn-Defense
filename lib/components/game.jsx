@@ -10,6 +10,7 @@ const Game = (bird) => {
   let health = 100;
   let round = 1;
   let hitPoints = 1;
+  let value = 10;
   
 
   return (
@@ -20,12 +21,13 @@ const Game = (bird) => {
           let i = 0;
           if (round % 2 == 0){
             hitPoints += 1;
+            value += 5;
           } else {
             difficulty += 5;
           }
           
           const play= setInterval(function(){
-          bird(hitPoints);
+          bird(hitPoints, value);
           i += 1;
           if ( i === difficulty){
             clearInterval(play);

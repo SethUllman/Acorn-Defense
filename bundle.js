@@ -274,7 +274,7 @@ var bird = function bird(speed) {
 
   var birdInterval = setInterval(function () {
     draw();
-  }, speed);
+  }, 20);
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (bird);
@@ -306,6 +306,7 @@ var Game = function Game(bird) {
   var health = 100;
   var round = 1;
   var hitPoints = 1;
+  var value = 10;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "game"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("canvas", {
@@ -322,12 +323,13 @@ var Game = function Game(bird) {
 
       if (round % 2 == 0) {
         hitPoints += 1;
+        value += 5;
       } else {
         difficulty += 5;
       }
 
       var play = setInterval(function () {
-        bird(hitPoints);
+        bird(hitPoints, value);
         i += 1;
 
         if (i === difficulty) {
