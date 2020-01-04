@@ -8,19 +8,12 @@ class Store extends React.Component{
       health: this.props.health,
       currentSquirrel: null,
       round: this.props.round,
-      squirrel: this.props.squirrel
+      squirrel: this.props.squirrel,
+      squirrels: {}
     }
   }
 
-  componentDidMount(){
-    this.state.squirrel();
-    
-  }
-
-  
-
   render(){
-    
     return (
       <div className='store'>
         <div className='status'>
@@ -30,7 +23,7 @@ class Store extends React.Component{
         <div className='squirrels'>
           <div className='basic_squirrel' onClick={() => {
             if (this.state.money >= 100){
-              this.setState({ money: [this.state.money - 100], currentSquirrel: 'Basic Squirrel'})
+              this.setState({ money: [this.state.money - 100], currentSquirrel: 'Basic Squirrel', squirrels: [this.state.squirrel(this.state.squirrels)]})
             }
           }}>
             <div className='basic_info'>

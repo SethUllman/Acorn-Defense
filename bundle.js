@@ -218,8 +218,8 @@ var bird = function bird(speed) {
   var width = window.screen.width;
   var x = -10;
   var y = 61 * height / 100;
-  var birdWidth = 6 * width / 100;
-  var birdHeight = 7 * height / 100;
+  var birdWidth = 5 * width / 100;
+  var birdHeight = 6 * height / 100;
 
   var draw = function draw() {
     if (count < 3000) {
@@ -228,7 +228,7 @@ var bird = function bird(speed) {
 
       var _bird = document.getElementById("blue_bird");
 
-      ctx.clearRect(x - 3, y - 3, birdWidth + 6, birdHeight + 5);
+      ctx.clearRect(x - 5, y - 3, birdWidth + 8, birdHeight + 6);
       ctx.imageSmoothingEnabled = false;
       ctx.drawImage(_bird, x, y, birdWidth, birdHeight);
 
@@ -361,8 +361,7 @@ var Game = function Game(bird) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var squirrel = function squirrel() {
-  var squirrels = [];
+var squirrel = function squirrel(squirrels) {
   var height = window.screen.height;
   var width = window.screen.width;
   var squirrel = document.getElementById("squirrel");
@@ -379,17 +378,20 @@ var squirrel = function squirrel() {
     var x = event.clientX - rect.left;
     var y = event.clientY - rect.top;
     ctx.drawImage(squirrel, x - 40, y - 40, squirrelWidth, squirrelHeight);
-    squirrels.push({
+    squirrels.count = {
       id: count,
       x: x,
       y: y
-    });
-    console.log(squirrels);
+    };
+    canvas.removeEventListener('mousedown', click, false);
   };
 
-  canvas.addEventListener("mousedown", function (e) {
+  var click = function click(e) {
     getMousePosition(canvas, e);
-  });
+  };
+
+  canvas.addEventListener("mousedown", click, false);
+  return squirrels;
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (squirrel);
@@ -443,17 +445,13 @@ function (_React$Component) {
       health: _this.props.health,
       currentSquirrel: null,
       round: _this.props.round,
-      squirrel: _this.props.squirrel
+      squirrel: _this.props.squirrel,
+      squirrels: {}
     };
     return _this;
   }
 
   _createClass(Store, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.state.squirrel();
-    }
-  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -470,7 +468,8 @@ function (_React$Component) {
           if (_this2.state.money >= 100) {
             _this2.setState({
               money: [_this2.state.money - 100],
-              currentSquirrel: 'Basic Squirrel'
+              currentSquirrel: 'Basic Squirrel',
+              squirrels: [_this2.state.squirrel(_this2.state.squirrels)]
             });
           }
         }
