@@ -217,8 +217,8 @@ var bird = function bird(speed) {
   var height = window.screen.height;
   var width = window.screen.width;
   var x = -10;
-  var y = 61 * height / 100;
-  var birdWidth = 5 * width / 100;
+  var y = 61.5 * height / 100;
+  var birdWidth = 4.5 * width / 100;
   var birdHeight = 6 * height / 100;
 
   var draw = function draw() {
@@ -228,35 +228,35 @@ var bird = function bird(speed) {
 
       var _bird = document.getElementById("blue_bird");
 
-      ctx.clearRect(x - 5, y - 3, birdWidth + 8, birdHeight + 6);
+      ctx.clearRect(x - 3, y - 4, birdWidth + 6, birdHeight + 6);
       ctx.imageSmoothingEnabled = false;
       ctx.drawImage(_bird, x, y, birdWidth, birdHeight);
 
-      if (y === 61 * height / 100 && x < 9.5 * width / 100) {
+      if (y === 61.5 * height / 100 && x < 10 * width / 100) {
         x += 4;
-      } else if (x > 9.4 * width / 100 && x < 19 * width / 100 && y > 46 * height / 100) {
+      } else if (x > 9.4 * width / 100 && x < 19 * width / 100 && y > 46.5 * height / 100) {
         y -= 4;
-      } else if (y > 45.9 * height / 100 && y < 47 * height / 100 && x < 19.5 * width / 100) {
+      } else if (y > 45.9 * height / 100 && y < 47 * height / 100 && x < 20 * width / 100) {
         x += 4;
-      } else if (x > 19 * width / 100 && x < 20 * width / 100 && y < 76.5 * height / 100 && y > 40 * height / 100) {
+      } else if (x > 20 * width / 100 && x < 20.5 * width / 100 && y < 76.5 * height / 100 && y > 40 * height / 100) {
         // 46 < y < 76.5
         y += 4;
-      } else if (y > 76 * height / 100 && y < 77 * height / 100 && x < 34.5 * width / 100) {
+      } else if (y > 76 * height / 100 && y < 77 * height / 100 && x < 35 * width / 100) {
         x += 4;
-      } else if (x > 34 * width / 100 && y > 53.5 * height / 100) {
+      } else if (x > 34 * width / 100 && y > 54 * height / 100) {
         y -= 4;
-      } else if (y < 54 * height / 100 && y > 32 * height / 100 && x < 49.5 * width / 100) {
+      } else if (y < 54 * height / 100 && y > 32 * height / 100 && x < 50 * width / 100) {
         x += 4;
-      } else if (x > 49 * width / 100 && x < 50 * width / 100 && y > 31 * height / 100) {
+      } else if (x > 49 * width / 100 && x < 50.5 * width / 100 && y > 31.5 * height / 100) {
         y -= 4;
-      } else if (y > 30.5 * height / 100 && x > 39.5 * width / 100) {
+      } else if (y > 30 * height / 100 && x > 40.5 * width / 100) {
         x -= 4;
-      } else if (x < 40 * width / 100 && y > 23 * height / 100) {
+      } else if (x < 41 * width / 100 && y > 24 * height / 100) {
         y -= 4;
-      } else if (y < 24 * height / 100 && y > 22 * height / 100 && x > 14.5 * width / 100) {
+      } else if (y < 24 * height / 100 && y > 22 * height / 100 && x > 15.5 * width / 100) {
         // 22 < y < 24
         x -= 4;
-      } else if (x < 15 * width / 100 && y < 24 * height / 100 && y > 8 * height / 100) {
+      } else if (x < 15.75 * width / 100 && y < 24 * height / 100 && y > 8.5 * height / 100) {
         // 8 < y < 24
         y -= 4;
       } else if (y < 8.5 * height / 100 && x < 60 * width / 100) {
