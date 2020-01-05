@@ -370,19 +370,16 @@ var squirrel = function squirrel(squirrels) {
   var canvas = document.getElementById("Canvas");
   var ctx = canvas.getContext("2d");
   ctx.imageSmoothingEnabled = false;
-  var count = 0;
 
   var getMousePosition = function getMousePosition(canvas, event) {
-    count += 1;
     var rect = canvas.getBoundingClientRect();
     var x = event.clientX - rect.left;
     var y = event.clientY - rect.top;
     ctx.drawImage(squirrel, x - 40, y - 40, squirrelWidth, squirrelHeight);
-    squirrels.count = {
-      id: count,
+    squirrels.push({
       x: x,
       y: y
-    };
+    });
     canvas.removeEventListener('mousedown', click, false);
   };
 
@@ -446,7 +443,7 @@ function (_React$Component) {
       currentSquirrel: null,
       round: _this.props.round,
       squirrel: _this.props.squirrel,
-      squirrels: {}
+      squirrels: []
     };
     return _this;
   }
@@ -467,10 +464,14 @@ function (_React$Component) {
         onClick: function onClick() {
           if (_this2.state.money >= 100) {
             _this2.setState({
+              squirrelCount: [_this2.state.squirrelCount++],
               money: [_this2.state.money - 100],
-              currentSquirrel: 'Basic Squirrel',
-              squirrels: [_this2.state.squirrel(_this2.state.squirrels)]
+              currentSquirrel: 'Basic Squirrel'
             });
+
+            var allSquirrels = _this2.state.squirrel(_this2.state.squirrels);
+
+            console.log(allSquirrels);
           }
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

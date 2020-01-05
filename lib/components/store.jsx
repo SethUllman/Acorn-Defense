@@ -9,7 +9,7 @@ class Store extends React.Component{
       currentSquirrel: null,
       round: this.props.round,
       squirrel: this.props.squirrel,
-      squirrels: {}
+      squirrels: [],
     }
   }
 
@@ -23,7 +23,10 @@ class Store extends React.Component{
         <div className='squirrels'>
           <div className='basic_squirrel' onClick={() => {
             if (this.state.money >= 100){
-              this.setState({ money: [this.state.money - 100], currentSquirrel: 'Basic Squirrel', squirrels: [this.state.squirrel(this.state.squirrels)]})
+              
+              this.setState({ squirrelCount: ([this.state.squirrelCount++]), money: [this.state.money - 100], currentSquirrel: 'Basic Squirrel'});
+              let allSquirrels = this.state.squirrel(this.state.squirrels);
+              console.log(allSquirrels);
             }
           }}>
             <div className='basic_info'>

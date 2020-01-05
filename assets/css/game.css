@@ -1,7 +1,4 @@
 .blue_bird {
-  /* width: 200vh; */
-  /* height: 100vh; */
-  /* position: absolute; */
   display: none;
 }
 
@@ -21,19 +18,24 @@
   background: url('../images/Map.jpg') no-repeat;
   background-size: 100% 100%;
   display: flex;
-  /* border: 1px solid blue; */
 }
 
 .canvas{
-  /* border: 1px solid blue; */
-  /* width: 200vh; */
-  /* height: 100vh; */
   position: absolute;
 }
 
 .play-button{
   z-index: 6;
   cursor: pointer;
+  width: 15%;
+  height: 5%;
+  border-radius: 5px;
+  margin: 20px;
+  border: 1px solid black;
+  background: url('../images/parchment.jpg');
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .basic_info{
