@@ -25,8 +25,8 @@ class Store extends React.Component{
             if (this.state.money >= 100){
               
               this.setState({ squirrelCount: ([this.state.squirrelCount++]), money: [this.state.money - 100], currentSquirrel: 'Basic Squirrel'});
-              let allSquirrels = this.state.squirrel(this.state.squirrels);
-              console.log(allSquirrels);
+              this.state.squirrel(this.state.squirrels);
+              console.log(this.state);
             }
           }}>
             <div className='basic_info'>

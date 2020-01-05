@@ -1,12 +1,13 @@
 import React from 'react';
 import Game from './lib/components/game';
-import bird from './lib/components/bird.js';
 
 class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      splash: true
+      splash: true,
+      height: window.screen.height,
+      width: window.screen.width
     }
   }
 
@@ -24,7 +25,7 @@ class App extends React.Component {
       )
     } else {
       return (
-        Game(bird)
+        new Game(this.state.height, this.state.width)
       )
     }
   }

@@ -98,7 +98,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _lib_components_game__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib/components/game */ "./lib/components/game.jsx");
-/* harmony import */ var _lib_components_bird_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./lib/components/bird.js */ "./lib/components/bird.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -120,7 +119,6 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
 var App =
 /*#__PURE__*/
 function (_React$Component) {
@@ -133,7 +131,9 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
     _this.state = {
-      splash: true
+      splash: true,
+      height: window.screen.height,
+      width: window.screen.width
     };
     return _this;
   }
@@ -164,7 +164,7 @@ function (_React$Component) {
           }
         }, "Play"));
       } else {
-        return Object(_lib_components_game__WEBPACK_IMPORTED_MODULE_1__["default"])(_lib_components_bird_js__WEBPACK_IMPORTED_MODULE_2__["default"]);
+        return new _lib_components_game__WEBPACK_IMPORTED_MODULE_1__["default"](this.state.height, this.state.width);
       }
     }
   }]);
@@ -210,74 +210,98 @@ document.addEventListener("DOMContentLoaded", function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-// import React from 'react';
-//try without using a react component
-var bird = function bird(speed) {
-  var count = 0;
+/* harmony import */ var _birdDraw__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./birdDraw */ "./lib/components/birdDraw.js");
+
+
+function Bird(hitpoints, value, screenHeight, screenWidth) {
+  var _this = this;
+
+  this.hitpoints = hitpoints;
+  this.value = value;
+  this.count = 0;
+  this.x = -10;
+  this.y = 61.5 * screenHeight / 100;
+  var draw = setInterval(function () {
+    var updatedBird = Object(_birdDraw__WEBPACK_IMPORTED_MODULE_0__["default"])(_this.x, _this.y, _this.count, draw);
+    _this.x = updatedBird.x;
+    _this.y = updatedBird.y;
+    _this.count = updatedBird.count;
+    return updatedBird;
+  }, 10);
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Bird);
+
+/***/ }),
+
+/***/ "./lib/components/birdDraw.js":
+/*!************************************!*\
+  !*** ./lib/components/birdDraw.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var birdDraw = function birdDraw(x, y, count, draw) {
   var height = window.screen.height;
   var width = window.screen.width;
-  var x = -10;
-  var y = 61.5 * height / 100;
   var birdWidth = 4.5 * width / 100;
   var birdHeight = 6 * height / 100;
+  var canvas = document.getElementById("Canvas");
+  var ctx = canvas.getContext("2d");
+  var birdImage = document.getElementById("blue_bird");
+  ctx.clearRect(x - 3, y - 4, birdWidth + 6, birdHeight + 6);
+  ctx.imageSmoothingEnabled = false;
+  ctx.drawImage(birdImage, x, y, birdWidth, birdHeight);
 
-  var draw = function draw() {
-    if (count < 3000) {
-      var canvas = document.getElementById("Canvas");
-      var ctx = canvas.getContext("2d");
-
-      var _bird = document.getElementById("blue_bird");
-
-      ctx.clearRect(x - 3, y - 4, birdWidth + 6, birdHeight + 6);
-      ctx.imageSmoothingEnabled = false;
-      ctx.drawImage(_bird, x, y, birdWidth, birdHeight);
-
-      if (y === 61.5 * height / 100 && x < 10 * width / 100) {
-        x += 4;
-      } else if (x > 9.4 * width / 100 && x < 19 * width / 100 && y > 46.5 * height / 100) {
-        y -= 4;
-      } else if (y > 45.9 * height / 100 && y < 47 * height / 100 && x < 20 * width / 100) {
-        x += 4;
-      } else if (x > 20 * width / 100 && x < 20.5 * width / 100 && y < 76.5 * height / 100 && y > 40 * height / 100) {
-        // 46 < y < 76.5
-        y += 4;
-      } else if (y > 76 * height / 100 && y < 77 * height / 100 && x < 35 * width / 100) {
-        x += 4;
-      } else if (x > 34 * width / 100 && y > 54 * height / 100) {
-        y -= 4;
-      } else if (y < 54 * height / 100 && y > 32 * height / 100 && x < 50 * width / 100) {
-        x += 4;
-      } else if (x > 49 * width / 100 && x < 50.5 * width / 100 && y > 31.5 * height / 100) {
-        y -= 4;
-      } else if (y > 30 * height / 100 && x > 40.5 * width / 100) {
-        x -= 4;
-      } else if (x < 41 * width / 100 && y > 24 * height / 100) {
-        y -= 4;
-      } else if (y < 24 * height / 100 && y > 22 * height / 100 && x > 15.5 * width / 100) {
-        // 22 < y < 24
-        x -= 4;
-      } else if (x < 15.75 * width / 100 && y < 24 * height / 100 && y > 8.5 * height / 100) {
-        // 8 < y < 24
-        y -= 4;
-      } else if (y < 8.5 * height / 100 && x < 60 * width / 100) {
-        x += 4;
-      } else if (x > 59 * width / 100) {
-        clearInterval(birdInterval);
-        ctx.clearRect(x, y, birdWidth + 1, birdHeight);
-      }
-
-      count += 1;
+  if (count < 1000) {
+    if (y === 61.5 * height / 100 && x < 10 * width / 100) {
+      x += 4;
+    } else if (x > 9.4 * width / 100 && x < 19 * width / 100 && y > 46.5 * height / 100) {
+      y -= 4;
+    } else if (y > 45.9 * height / 100 && y < 47 * height / 100 && x < 20 * width / 100) {
+      x += 4;
+    } else if (x > 20 * width / 100 && x < 20.5 * width / 100 && y < 76.5 * height / 100 && y > 40 * height / 100) {
+      // 46 < y < 76.5
+      y += 4;
+    } else if (y > 76 * height / 100 && y < 77 * height / 100 && x < 35 * width / 100) {
+      x += 4;
+    } else if (x > 34 * width / 100 && y > 54 * height / 100) {
+      y -= 4;
+    } else if (y < 54 * height / 100 && y > 32 * height / 100 && x < 50 * width / 100) {
+      x += 4;
+    } else if (x > 49 * width / 100 && x < 50.5 * width / 100 && y > 31.5 * height / 100) {
+      y -= 4;
+    } else if (y > 30 * height / 100 && x > 40.5 * width / 100) {
+      x -= 4;
+    } else if (x < 41 * width / 100 && y > 24 * height / 100) {
+      y -= 4;
+    } else if (y < 24 * height / 100 && y > 22 * height / 100 && x > 15.5 * width / 100) {
+      // 22 < y < 24
+      x -= 4;
+    } else if (x < 15.75 * width / 100 && y < 24 * height / 100 && y > 8.5 * height / 100) {
+      // 8 < y < 24
+      y -= 4;
+    } else if (y < 8.5 * height / 100 && x < 60 * width / 100) {
+      x += 4;
+    } else if (x > 59 * width / 100) {
+      clearInterval(draw);
+      ctx.clearRect(x, y, birdWidth + 1, birdHeight);
     }
+  }
 
-    ;
-  };
+  count += 1;
+  var updatedBird = {
+    x: x,
+    y: y,
+    count: count
+  }; // console.log(updatedBird);
 
-  var birdInterval = setInterval(function () {
-    draw();
-  }, 20);
+  return updatedBird;
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (bird);
+/* harmony default export */ __webpack_exports__["default"] = (birdDraw);
 
 /***/ }),
 
@@ -294,26 +318,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store */ "./lib/components/store.jsx");
 /* harmony import */ var _squirrel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./squirrel */ "./lib/components/squirrel.js");
+/* harmony import */ var _bird_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./bird.js */ "./lib/components/bird.js");
+/* harmony import */ var _birdDraw__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./birdDraw */ "./lib/components/birdDraw.js");
 
 
 
 
-var Game = function Game(bird) {
-  var height = window.screen.height;
-  var width = window.screen.width;
+
+
+function Game(screenHeight, screenWidth) {
   var difficulty = 0;
   var money = 500;
   var health = 100;
   var round = 1;
   var hitPoints = 1;
   var value = 10;
+  var birds = [];
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "game"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("canvas", {
     id: "Canvas",
     className: "canvas",
-    width: width,
-    height: height
+    width: screenWidth,
+    height: screenHeight
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "play-area"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -321,7 +348,7 @@ var Game = function Game(bird) {
     onClick: function onClick() {
       var i = 0;
 
-      if (round % 2 == 0) {
+      if (round % 2 === 0) {
         hitPoints += 1;
         value += 5;
       } else {
@@ -329,8 +356,17 @@ var Game = function Game(bird) {
       }
 
       var play = setInterval(function () {
-        bird(hitPoints, value);
+        var bird = new _bird_js__WEBPACK_IMPORTED_MODULE_3__["default"](hitPoints, value, screenHeight, screenWidth);
+        birds.push(bird);
         i += 1;
+        setInterval(function () {
+          for (var b = 0; b < i; b++) {
+            var x = birds[b].x;
+            var y = birds[b].y;
+            var count = birds[b].count;
+            Object(_birdDraw__WEBPACK_IMPORTED_MODULE_4__["default"])(x, y, count);
+          }
+        });
 
         if (i === difficulty) {
           clearInterval(play);
@@ -346,7 +382,7 @@ var Game = function Game(bird) {
     round: round,
     squirrel: _squirrel__WEBPACK_IMPORTED_MODULE_2__["default"]
   }));
-};
+}
 
 /* harmony default export */ __webpack_exports__["default"] = (Game);
 
@@ -361,7 +397,9 @@ var Game = function Game(bird) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var squirrel = function squirrel(squirrels) {
+function squirrel(x, y) {
+  this.x = x;
+  this.y = y;
   var height = window.screen.height;
   var width = window.screen.width;
   var squirrel = document.getElementById("squirrel");
@@ -389,7 +427,7 @@ var squirrel = function squirrel(squirrels) {
 
   canvas.addEventListener("mousedown", click, false);
   return squirrels;
-};
+}
 
 /* harmony default export */ __webpack_exports__["default"] = (squirrel);
 
@@ -469,9 +507,9 @@ function (_React$Component) {
               currentSquirrel: 'Basic Squirrel'
             });
 
-            var allSquirrels = _this2.state.squirrel(_this2.state.squirrels);
+            _this2.state.squirrel(_this2.state.squirrels);
 
-            console.log(allSquirrels);
+            console.log(_this2.state);
           }
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
