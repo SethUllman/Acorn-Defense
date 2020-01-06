@@ -86,15 +86,19 @@ class Game extends React.Component{
 
           let newBirds = this.state.birds;
           newBirds[j].hitpoints -= 1;
-          console.log(this.state.money);
-          console.log(newBirds[j].hitpointes);
           if (newBirds[j].hitpoints === 0){
 
             
             newBirds.splice(j, 1);
             console.log(this.state.money);
-            this.setState({birds: newBirds, money: this.state.money += this.state.value});
-            console.log(this.state.money);
+            let newMoney = this.state.money;
+            if (Array.isArray(newMoney)){
+              newMoney = newMoney[0];
+            }
+            newMoney += this.state.value;
+            
+            this.setState({birds: newBirds, money: newMoney});
+            
 
           } else {
 

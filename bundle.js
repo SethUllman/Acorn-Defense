@@ -464,17 +464,21 @@ function (_React$Component) {
           if (bird.x < current.x + 200 && bird.x > current.x - 200 & bird.y < current.y + 200 && bird.y > current.y - 200) {
             var newBirds = this.state.birds;
             newBirds[j].hitpoints -= 1;
-            console.log(this.state.money);
-            console.log(newBirds[j].hitpointes);
 
             if (newBirds[j].hitpoints === 0) {
               newBirds.splice(j, 1);
               console.log(this.state.money);
+              var newMoney = this.state.money;
+
+              if (Array.isArray(newMoney)) {
+                newMoney = newMoney[0];
+              }
+
+              newMoney += this.state.value;
               this.setState({
                 birds: newBirds,
-                money: this.state.money += this.state.value
+                money: newMoney
               });
-              console.log(this.state.money);
             } else {
               this.setState({
                 birds: newBirds
