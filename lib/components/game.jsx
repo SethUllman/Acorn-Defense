@@ -1,5 +1,4 @@
 import React from 'react';
-import Store from './store';
 import squirrel from './squirrel';
 import Bird from './bird.js';
 import birdDraw from './birdDraw';
@@ -22,6 +21,7 @@ class Game extends React.Component{
     }
     this.handlePlay = this.handlePlay.bind(this);
     this.play = this.play.bind(this);
+    this.shoot = this.shoot.bind(this);
   }
 
   handlePlay(){
@@ -48,6 +48,9 @@ class Game extends React.Component{
       i += 1;
       
       const birdStatus = setInterval(() => {
+        const shootTimer = setInterval(() => {
+          this.shoot();
+        }, 2000)
         for (let b = 0; b < i; b++) {
           if (this.state.birds[b]) {
             let x = this.state.birds[b].x;
@@ -62,6 +65,7 @@ class Game extends React.Component{
           }
           if (this.state.birds.length === 0) {
             clearInterval(birdStatus);
+            clearInterval(shootTimer);
           }
         }
       }, 500);
@@ -69,6 +73,40 @@ class Game extends React.Component{
         clearInterval(roundStart);
       }
     }, 1000);
+  }
+
+  shoot(){
+    for(let i = 0; i < this.state.squirrels.length; i++){
+
+      let current = this.state.squirrels[i];
+      for(let j = 0; j < this.state.birds.length; j++){
+
+        let bird = this.state.birds[j];
+        if(bird.x < current.x + 200 && bird.x > current.x - 200 & bird.y < current.y + 200 && bird.y > current.y - 200){
+
+          let newBirds = this.state.birds;
+          newBirds[j].hitpoints -= 1;
+          console.log(this.state.money);
+          console.log(newBirds[j].hitpointes);
+          if (newBirds[j].hitpoints === 0){
+
+            
+            newBirds.splice(j, 1);
+            console.log(this.state.money);
+            this.setState({birds: newBirds, money: this.state.money += this.state.value});
+            console.log(this.state.money);
+
+          } else {
+
+            this.setState({birds: newBirds});
+
+          }
+        }
+        if (i === this.state.squirrels.length + 1 && j === this.state.birds.length + 1){
+        
+        }
+      }
+    }
   }
 
   render(){
@@ -90,9 +128,9 @@ class Game extends React.Component{
             <div className='basic_squirrel' onClick={() => {
               if (this.state.money >= 100) {
 
-                this.setState({ squirrelCount: ([this.state.squirrelCount++]), money: [this.state.money - 100], currentSquirrel: 'Basic Squirrel' });
-                this.state.squirrel(this.state.squirrels);
-
+                const updatedSquirrels = squirrel(this.state.squirrels);
+                this.setState({ squirrelCount: ([this.state.squirrelCount++]), money: [this.state.money - 100], currentSquirrel: 'Basic Squirrel', squirrels: updatedSquirrels });
+            
               }
             }}>
               <div className='basic_info'>

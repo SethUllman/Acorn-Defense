@@ -323,10 +323,9 @@ var birdDraw = function birdDraw(x, y, count, draw, alive) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store */ "./lib/components/store.jsx");
-/* harmony import */ var _squirrel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./squirrel */ "./lib/components/squirrel.js");
-/* harmony import */ var _bird_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./bird.js */ "./lib/components/bird.js");
-/* harmony import */ var _birdDraw__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./birdDraw */ "./lib/components/birdDraw.js");
+/* harmony import */ var _squirrel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./squirrel */ "./lib/components/squirrel.js");
+/* harmony import */ var _bird_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./bird.js */ "./lib/components/bird.js");
+/* harmony import */ var _birdDraw__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./birdDraw */ "./lib/components/birdDraw.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -344,7 +343,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 
 
 
@@ -377,6 +375,7 @@ function (_React$Component) {
     };
     _this.handlePlay = _this.handlePlay.bind(_assertThisInitialized(_this));
     _this.play = _this.play.bind(_assertThisInitialized(_this));
+    _this.shoot = _this.shoot.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -410,7 +409,7 @@ function (_React$Component) {
 
       var i = 0;
       var roundStart = setInterval(function () {
-        var bird = new _bird_js__WEBPACK_IMPORTED_MODULE_3__["default"](_this2.state.hitPoints, _this2.state.value, _this2.props.width, _this2.props.height, _this2.state.alive);
+        var bird = new _bird_js__WEBPACK_IMPORTED_MODULE_2__["default"](_this2.state.hitPoints, _this2.state.value, _this2.props.width, _this2.props.height, _this2.state.alive);
 
         var newBirds = _this2.state.birds.concat(bird);
 
@@ -420,6 +419,10 @@ function (_React$Component) {
 
         i += 1;
         var birdStatus = setInterval(function () {
+          var shootTimer = setInterval(function () {
+            _this2.shoot();
+          }, 2000);
+
           for (var b = 0; b < i; b++) {
             if (_this2.state.birds[b]) {
               var x = _this2.state.birds[b].x;
@@ -439,6 +442,7 @@ function (_React$Component) {
 
             if (_this2.state.birds.length === 0) {
               clearInterval(birdStatus);
+              clearInterval(shootTimer);
             }
           }
         }, 500);
@@ -447,6 +451,40 @@ function (_React$Component) {
           clearInterval(roundStart);
         }
       }, 1000);
+    }
+  }, {
+    key: "shoot",
+    value: function shoot() {
+      for (var i = 0; i < this.state.squirrels.length; i++) {
+        var current = this.state.squirrels[i];
+
+        for (var j = 0; j < this.state.birds.length; j++) {
+          var bird = this.state.birds[j];
+
+          if (bird.x < current.x + 200 && bird.x > current.x - 200 & bird.y < current.y + 200 && bird.y > current.y - 200) {
+            var newBirds = this.state.birds;
+            newBirds[j].hitpoints -= 1;
+            console.log(this.state.money);
+            console.log(newBirds[j].hitpointes);
+
+            if (newBirds[j].hitpoints === 0) {
+              newBirds.splice(j, 1);
+              console.log(this.state.money);
+              this.setState({
+                birds: newBirds,
+                money: this.state.money += this.state.value
+              });
+              console.log(this.state.money);
+            } else {
+              this.setState({
+                birds: newBirds
+              });
+            }
+          }
+
+          if (i === this.state.squirrels.length + 1 && j === this.state.birds.length + 1) {}
+        }
+      }
     }
   }, {
     key: "render",
@@ -477,13 +515,14 @@ function (_React$Component) {
         className: "basic_squirrel",
         onClick: function onClick() {
           if (_this3.state.money >= 100) {
+            var updatedSquirrels = Object(_squirrel__WEBPACK_IMPORTED_MODULE_1__["default"])(_this3.state.squirrels);
+
             _this3.setState({
               squirrelCount: [_this3.state.squirrelCount++],
               money: [_this3.state.money - 100],
-              currentSquirrel: 'Basic Squirrel'
+              currentSquirrel: 'Basic Squirrel',
+              squirrels: updatedSquirrels
             });
-
-            _this3.state.squirrel(_this3.state.squirrels);
           }
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -512,9 +551,7 @@ function (_React$Component) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function squirrel(x, y) {
-  this.x = x;
-  this.y = y;
+function squirrel(squirrels) {
   var height = window.screen.height;
   var width = window.screen.width;
   var squirrel = document.getElementById("squirrel");
@@ -545,17 +582,6 @@ function squirrel(x, y) {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (squirrel);
-
-/***/ }),
-
-/***/ "./lib/components/store.jsx":
-/*!**********************************!*\
-  !*** ./lib/components/store.jsx ***!
-  \**********************************/
-/*! exports provided: default */
-/***/ (function(module, exports) {
-
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/Users/seth_u/Desktop/Tower-Defense/lib/components/store.jsx'");
 
 /***/ }),
 
