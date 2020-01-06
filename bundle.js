@@ -371,7 +371,9 @@ function (_React$Component) {
       value: 10,
       alive: true,
       birds: [],
-      missed: 0
+      missed: 0,
+      currentSquirrel: null,
+      squirrels: []
     };
     _this.handlePlay = _this.handlePlay.bind(_assertThisInitialized(_this));
     _this.play = _this.play.bind(_assertThisInitialized(_this));
@@ -431,8 +433,7 @@ function (_React$Component) {
                   missed: [_this2.state.missed += 1],
                   health: [_this2.state.health -= _this2.state.difficulty][0],
                   birds: _newBirds
-                }); // debugger;
-
+                });
               }
             }
 
@@ -464,15 +465,34 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "play-button",
         onClick: function onClick() {
-          // debugger;
           _this3.handlePlay();
         }
-      }, "Next Round")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_store__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        money: this.state.money,
-        health: this.state.health,
-        round: this.state.round,
-        squirrel: _squirrel__WEBPACK_IMPORTED_MODULE_2__["default"]
-      }));
+      }, "Next Round")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "store"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "status"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "money: ", this.state.money), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "health: ", this.state.health)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "squirrels"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "basic_squirrel",
+        onClick: function onClick() {
+          if (_this3.state.money >= 100) {
+            _this3.setState({
+              squirrelCount: [_this3.state.squirrelCount++],
+              money: [_this3.state.money - 100],
+              currentSquirrel: 'Basic Squirrel'
+            });
+
+            _this3.state.squirrel(_this3.state.squirrels);
+          }
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "basic_info"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Basic Squirrel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "basic_price"
+      }, "$100")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "basic_squirrel_img"
+      })))));
     }
   }]);
 
@@ -533,91 +553,9 @@ function squirrel(x, y) {
   !*** ./lib/components/store.jsx ***!
   \**********************************/
 /*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-var Store =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(Store, _React$Component);
-
-  function Store(props) {
-    var _this;
-
-    _classCallCheck(this, Store);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Store).call(this, props));
-    _this.state = {
-      money: _this.props.money,
-      currentSquirrel: null,
-      round: _this.props.round,
-      squirrel: _this.props.squirrel,
-      squirrels: []
-    };
-    return _this;
-  }
-
-  _createClass(Store, [{
-    key: "render",
-    value: function render() {
-      var _this2 = this;
-
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "store"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "status"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "money: ", this.state.money), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "health: ", this.props.health)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "squirrels"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "basic_squirrel",
-        onClick: function onClick() {
-          if (_this2.state.money >= 100) {
-            _this2.setState({
-              squirrelCount: [_this2.state.squirrelCount++],
-              money: [_this2.state.money - 100],
-              currentSquirrel: 'Basic Squirrel'
-            });
-
-            _this2.state.squirrel(_this2.state.squirrels);
-          }
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "basic_info"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Basic Squirrel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "basic_price"
-      }, "$100")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "basic_squirrel_img"
-      }))));
-    }
-  }]);
-
-  return Store;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-
-/* harmony default export */ __webpack_exports__["default"] = (Store);
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/Users/seth_u/Desktop/Tower-Defense/lib/components/store.jsx'");
 
 /***/ }),
 

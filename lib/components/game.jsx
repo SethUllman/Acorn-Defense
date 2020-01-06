@@ -16,7 +16,9 @@ class Game extends React.Component{
       value: 10,
       alive: true,
       birds: [],
-      missed: 0
+      missed: 0,
+      currentSquirrel: null,
+      squirrels: []
     }
     this.handlePlay = this.handlePlay.bind(this);
     this.play = this.play.bind(this);
@@ -52,14 +54,9 @@ class Game extends React.Component{
   
             if (x > ((59 * this.props.width) / 100)) {
 
-              
               let newBirds = this.state.birds;
               newBirds.splice(b, 1);
-              
               this.setState({ missed: [this.state.missed += 1], health: [this.state.health -= this.state.difficulty][0], birds: newBirds });
-              
-
-              // debugger;
             
             }
           }
@@ -80,13 +77,32 @@ class Game extends React.Component{
         <canvas id="Canvas" className="canvas" width={this.props.width} height={this.props.height}></canvas>
         <div className='play-area'>
           <div className='play-button' onClick={() => {
-            // debugger;
             this.handlePlay();
           }} >Next Round</div>
         
         </div>
-        {/* {console.log(this.state.health)} */}
-        <Store money={this.state.money} health={this.state.health} round={this.state.round} squirrel={squirrel}/>
+        <div className='store'>
+          <div className='status'>
+            <div>money: {this.state.money}</div>
+            <div>health: {this.state.health}</div>
+          </div>
+          <div className='squirrels'>
+            <div className='basic_squirrel' onClick={() => {
+              if (this.state.money >= 100) {
+
+                this.setState({ squirrelCount: ([this.state.squirrelCount++]), money: [this.state.money - 100], currentSquirrel: 'Basic Squirrel' });
+                this.state.squirrel(this.state.squirrels);
+
+              }
+            }}>
+              <div className='basic_info'>
+                <div>Basic Squirrel</div>
+                <div className='basic_price'>$100</div>
+              </div>
+              <div className='basic_squirrel_img'></div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
