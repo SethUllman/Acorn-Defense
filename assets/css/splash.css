@@ -10,23 +10,27 @@
 
 .splash-welcome{
   /* border: 1px solid red; */
-  width: 33%;
+  width: 50%;
   height: 10%;
-  font-size: 5vw;
+  display: flex;
+  justify-content: center;
+  font-family: 'Simonetta', cursive;
+  font-size: 7vw;
+  font-weight: bolder;
   margin-bottom: 40px;
 }
 
 .splash-play{
   margin-top: 40px;
   border: 1px solid gray;
-  border-radius: 5px;
+  border-radius: 10px;
   width: 20%;
   height: 10%;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 36px;
-  background: #35A6FF;
+  background: #006611;
   cursor: pointer;
   z-index: 5;
 }

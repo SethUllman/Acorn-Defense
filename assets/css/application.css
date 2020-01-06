@@ -2,3 +2,7 @@
 @import url('./splash.css');
 @import url('./game.css');
 @import url('./sideBar.css');
+@font-face {
+  font-family: 'bloons';
+  src: local('bloons'), url('../fonts/OETZTYP_.TTF'), format('truetype');
+}

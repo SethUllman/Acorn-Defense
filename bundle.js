@@ -213,7 +213,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _birdDraw__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./birdDraw */ "./lib/components/birdDraw.js");
 
 
-function Bird(hitpoints, value, screenHeight, screenWidth) {
+function Bird(hitpoints, value, screenHeight, screenWidth, alive) {
   var _this = this;
 
   this.hitpoints = hitpoints;
@@ -222,10 +222,11 @@ function Bird(hitpoints, value, screenHeight, screenWidth) {
   this.x = -10;
   this.y = 61.5 * screenHeight / 100;
   var draw = setInterval(function () {
-    var updatedBird = Object(_birdDraw__WEBPACK_IMPORTED_MODULE_0__["default"])(_this.x, _this.y, _this.count, draw);
+    var updatedBird = Object(_birdDraw__WEBPACK_IMPORTED_MODULE_0__["default"])(_this.x, _this.y, _this.count, draw, alive);
     _this.x = updatedBird.x;
     _this.y = updatedBird.y;
     _this.count = updatedBird.count;
+    _this.interval = updatedBird.interval;
     return updatedBird;
   }, 10);
 }
@@ -243,7 +244,7 @@ function Bird(hitpoints, value, screenHeight, screenWidth) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var birdDraw = function birdDraw(x, y, count, draw) {
+var birdDraw = function birdDraw(x, y, count, draw, alive) {
   var height = window.screen.height;
   var width = window.screen.width;
   var birdWidth = 4.5 * width / 100;
@@ -295,9 +296,10 @@ var birdDraw = function birdDraw(x, y, count, draw) {
   var updatedBird = {
     x: x,
     y: y,
-    count: count
-  }; // console.log(updatedBird);
-
+    count: count,
+    interval: draw,
+    alive: true
+  };
   return updatedBird;
 };
 
@@ -333,7 +335,52 @@ function Game(screenHeight, screenWidth) {
   var round = 1;
   var hitPoints = 1;
   var value = 10;
+  var alive = true;
   var birds = [];
+  var missed = 0;
+  var width = window.screen.width;
+
+  function handlePlay() {
+    var i = 0;
+    birds = [];
+
+    if (round % 2 === 0) {
+      hitPoints += 1;
+      value += 5;
+    } else {
+      difficulty += 5;
+    }
+
+    var play = setInterval(function () {
+      var bird = new _bird_js__WEBPACK_IMPORTED_MODULE_3__["default"](hitPoints, value, screenHeight, screenWidth, alive);
+      birds.push(bird);
+      i += 1;
+      var birdStatus = setInterval(function () {
+        for (var b = 0; b < i; b++) {
+          if (birds[b]) {
+            var x = birds[b].x;
+
+            if (x > 59 * width / 100) {
+              missed += 1;
+              birds.splice(b, 1);
+              health -= difficulty;
+              console.log(health);
+            }
+          }
+
+          if (birds.length === 0) {
+            clearInterval(birdStatus);
+          }
+        }
+      }, 500);
+
+      if (i === difficulty) {
+        clearInterval(play);
+      }
+    }, 1000);
+    round += 1;
+  }
+
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "game"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("canvas", {
@@ -346,37 +393,9 @@ function Game(screenHeight, screenWidth) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "play-button",
     onClick: function onClick() {
-      var i = 0;
-
-      if (round % 2 === 0) {
-        hitPoints += 1;
-        value += 5;
-      } else {
-        difficulty += 5;
-      }
-
-      var play = setInterval(function () {
-        var bird = new _bird_js__WEBPACK_IMPORTED_MODULE_3__["default"](hitPoints, value, screenHeight, screenWidth);
-        birds.push(bird);
-        i += 1;
-        setInterval(function () {
-          for (var b = 0; b < i; b++) {
-            var x = birds[b].x;
-            var y = birds[b].y;
-            var count = birds[b].count;
-            Object(_birdDraw__WEBPACK_IMPORTED_MODULE_4__["default"])(x, y, count);
-          }
-        });
-
-        if (i === difficulty) {
-          clearInterval(play);
-        }
-      }, 1000);
-      round += 1;
+      handlePlay();
     }
-  }, "Next Round"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "round_counter"
-  }, round)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_store__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, "Next Round")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_store__WEBPACK_IMPORTED_MODULE_1__["default"], {
     money: money,
     health: health,
     round: round,
