@@ -26,7 +26,7 @@
 }
 
 .basic_squirrel{
-  z-index: 6;
+  z-index: 10;
   height: 15%;
   width: 60%;
   background: url('../images/parchment.jpg');
@@ -39,10 +39,16 @@
   font-size: 36px;
 }
 
+.basic_squirrel div{
+  cursor: pointer;
+}
+
 .basic_squirrel_img{
   z-index: 7;
   background: url('../sprites/owlet/Owlet_Monster.png') no-repeat;
   width: 25%;
   height: 90%;
   background-size: contain;
+  cursor: pointer;
 }
+
