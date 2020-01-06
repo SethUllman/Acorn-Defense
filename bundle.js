@@ -164,7 +164,10 @@ function (_React$Component) {
           }
         }, "Play"));
       } else {
-        return new _lib_components_game__WEBPACK_IMPORTED_MODULE_1__["default"](this.state.height, this.state.width);
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_lib_components_game__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          height: this.state.height,
+          width: this.state.width
+        });
       }
     }
   }]);
@@ -213,20 +216,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _birdDraw__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./birdDraw */ "./lib/components/birdDraw.js");
 
 
-function Bird(hitpoints, value, screenHeight, screenWidth, alive) {
+function Bird(hitpoints, value, width, height, alive) {
   var _this = this;
 
   this.hitpoints = hitpoints;
   this.value = value;
   this.count = 0;
   this.x = -10;
-  this.y = 61.5 * screenHeight / 100;
+  this.y = 61.5 * height / 100;
   var draw = setInterval(function () {
     var updatedBird = Object(_birdDraw__WEBPACK_IMPORTED_MODULE_0__["default"])(_this.x, _this.y, _this.count, draw, alive);
     _this.x = updatedBird.x;
     _this.y = updatedBird.y;
     _this.count = updatedBird.count;
-    _this.interval = updatedBird.interval;
+    _this.interval = updatedBird.interval; // debugger;
+
     return updatedBird;
   }, 10);
 }
@@ -299,7 +303,8 @@ var birdDraw = function birdDraw(x, y, count, draw, alive) {
     count: count,
     interval: draw,
     alive: true
-  };
+  }; // debugger;
+
   return updatedBird;
 };
 
@@ -322,86 +327,157 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _squirrel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./squirrel */ "./lib/components/squirrel.js");
 /* harmony import */ var _bird_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./bird.js */ "./lib/components/bird.js");
 /* harmony import */ var _birdDraw__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./birdDraw */ "./lib/components/birdDraw.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
 
 
 
 
-function Game(screenHeight, screenWidth) {
-  var difficulty = 0;
-  var money = 500;
-  var health = 100;
-  var round = 1;
-  var hitPoints = 1;
-  var value = 10;
-  var alive = true;
-  var birds = [];
-  var missed = 0;
-  var width = window.screen.width;
 
-  function handlePlay() {
-    var i = 0;
-    birds = [];
+var Game =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Game, _React$Component);
 
-    if (round % 2 === 0) {
-      hitPoints += 1;
-      value += 5;
-    } else {
-      difficulty += 5;
-    }
+  function Game(props) {
+    var _this;
 
-    var play = setInterval(function () {
-      var bird = new _bird_js__WEBPACK_IMPORTED_MODULE_3__["default"](hitPoints, value, screenHeight, screenWidth, alive);
-      birds.push(bird);
-      i += 1;
-      var birdStatus = setInterval(function () {
-        for (var b = 0; b < i; b++) {
-          if (birds[b]) {
-            var x = birds[b].x;
+    _classCallCheck(this, Game);
 
-            if (x > 59 * width / 100) {
-              missed += 1;
-              birds.splice(b, 1);
-              health -= difficulty;
-              console.log(health);
-            }
-          }
-
-          if (birds.length === 0) {
-            clearInterval(birdStatus);
-          }
-        }
-      }, 500);
-
-      if (i === difficulty) {
-        clearInterval(play);
-      }
-    }, 1000);
-    round += 1;
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Game).call(this, props));
+    _this.state = {
+      difficulty: 0,
+      money: 500,
+      health: 100,
+      round: 1,
+      hitPoints: 1,
+      value: 10,
+      alive: true,
+      birds: [],
+      missed: 0
+    };
+    _this.handlePlay = _this.handlePlay.bind(_assertThisInitialized(_this));
+    _this.play = _this.play.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "game"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("canvas", {
-    id: "Canvas",
-    className: "canvas",
-    width: screenWidth,
-    height: screenHeight
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "play-area"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "play-button",
-    onClick: function onClick() {
-      handlePlay();
+  _createClass(Game, [{
+    key: "handlePlay",
+    value: function handlePlay() {
+      this.setState({
+        birds: []
+      });
+
+      if (this.state.round % 2 === 0) {
+        this.setState({
+          hitPoints: [this.state.hitPoints += 5],
+          value: [this.state.value == 5]
+        });
+      } else {
+        this.setState({
+          difficulty: this.state.difficulty += 5
+        });
+      }
+
+      this.play();
+      this.setState({
+        round: [this.state.round += 1]
+      });
     }
-  }, "Next Round")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_store__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    money: money,
-    health: health,
-    round: round,
-    squirrel: _squirrel__WEBPACK_IMPORTED_MODULE_2__["default"]
-  }));
-}
+  }, {
+    key: "play",
+    value: function play() {
+      var _this2 = this;
+
+      var i = 0;
+      var roundStart = setInterval(function () {
+        var bird = new _bird_js__WEBPACK_IMPORTED_MODULE_3__["default"](_this2.state.hitPoints, _this2.state.value, _this2.props.width, _this2.props.height, _this2.state.alive);
+
+        var newBirds = _this2.state.birds.concat(bird);
+
+        _this2.setState({
+          birds: newBirds
+        });
+
+        i += 1;
+        var birdStatus = setInterval(function () {
+          for (var b = 0; b < i; b++) {
+            if (_this2.state.birds[b]) {
+              var x = _this2.state.birds[b].x;
+
+              if (x > 59 * _this2.props.width / 100) {
+                var _newBirds = _this2.state.birds;
+
+                _newBirds.splice(b, 1);
+
+                _this2.setState({
+                  missed: [_this2.state.missed += 1],
+                  health: [_this2.state.health -= _this2.state.difficulty][0],
+                  birds: _newBirds
+                }); // debugger;
+
+              }
+            }
+
+            if (_this2.state.birds.length === 0) {
+              clearInterval(birdStatus);
+            }
+          }
+        }, 500);
+
+        if (i === _this2.state.difficulty) {
+          clearInterval(roundStart);
+        }
+      }, 1000);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "game"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("canvas", {
+        id: "Canvas",
+        className: "canvas",
+        width: this.props.width,
+        height: this.props.height
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "play-area"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "play-button",
+        onClick: function onClick() {
+          // debugger;
+          _this3.handlePlay();
+        }
+      }, "Next Round")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_store__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        money: this.state.money,
+        health: this.state.health,
+        round: this.state.round,
+        squirrel: _squirrel__WEBPACK_IMPORTED_MODULE_2__["default"]
+      }));
+    }
+  }]);
+
+  return Game;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (Game);
 
@@ -496,7 +572,6 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Store).call(this, props));
     _this.state = {
       money: _this.props.money,
-      health: _this.props.health,
       currentSquirrel: null,
       round: _this.props.round,
       squirrel: _this.props.squirrel,
@@ -514,7 +589,7 @@ function (_React$Component) {
         className: "store"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "status"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "money: ", this.state.money), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "health: ", this.state.health)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "money: ", this.state.money), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "health: ", this.props.health)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "squirrels"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "basic_squirrel",
@@ -527,8 +602,6 @@ function (_React$Component) {
             });
 
             _this2.state.squirrel(_this2.state.squirrels);
-
-            console.log(_this2.state);
           }
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

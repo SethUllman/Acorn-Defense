@@ -16,6 +16,7 @@ class App extends React.Component {
   }
 
   render(){
+    
     if(this.state.splash){
       return (
         <div className='splash'>
@@ -25,7 +26,7 @@ class App extends React.Component {
       )
     } else {
       return (
-        new Game(this.state.height, this.state.width)
+        <Game height={this.state.height} width={this.state.width}/>
       )
     }
   }

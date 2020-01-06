@@ -5,7 +5,6 @@ class Store extends React.Component{
     super(props);
     this.state = {
       money: this.props.money,
-      health: this.props.health,
       currentSquirrel: null,
       round: this.props.round,
       squirrel: this.props.squirrel,
@@ -18,7 +17,7 @@ class Store extends React.Component{
       <div className='store'>
         <div className='status'>
           <div>money: {this.state.money}</div>
-          <div>health: {this.state.health}</div>
+          <div>health: {this.props.health}</div>
         </div>
         <div className='squirrels'>
           <div className='basic_squirrel' onClick={() => {
@@ -26,7 +25,7 @@ class Store extends React.Component{
               
               this.setState({ squirrelCount: ([this.state.squirrelCount++]), money: [this.state.money - 100], currentSquirrel: 'Basic Squirrel'});
               this.state.squirrel(this.state.squirrels);
-              console.log(this.state);
+        
             }
           }}>
             <div className='basic_info'>
