@@ -28,7 +28,7 @@ class Game extends React.Component{
     
     this.setState({birds: []});
     if (this.state.round % 2 === 0) {
-      this.setState({hitPoints: [this.state.hitPoints += 5], value: [this.state.value == 5]});
+      this.setState({hitPoints: this.state.hitPoints += 5, value: this.state.value += 5});
     } else {
       this.setState({difficulty: this.state.difficulty += 5})
     }
@@ -126,7 +126,7 @@ class Game extends React.Component{
         <div className='store'>
           <div className='status'>
             <div>money: {this.state.money}</div>
-            <div>health: {this.state.health}</div>
+            <div>acorns: {this.state.health}</div>
           </div>
           <div className='squirrels'>
             <div className='basic_squirrel' onClick={() => {

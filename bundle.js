@@ -161,7 +161,7 @@ function (_React$Component) {
           className: "objective"
         }, "Objective:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
           className: "description"
-        }, "Protect your acorns from the hoards of hungry birds! Choose a squirrel from the store and then click anywhere in the forest to place it. Your squirrels will automatically fire at the birds that are in range. Killing birds gives you more money, but be careful! The birds you fail to kill will damage you!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, "Protect your acorns from the hoards of hungry birds! Choose a squirrel from the store and then click anywhere in the forest to place it. Your squirrels will automatically fire at the birds that are in range. Killing birds gives you more money, but be careful! The birds you fail to kill will steal your acorns!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "splash-play",
           onClick: function onClick() {
             _this2.setState({
@@ -238,7 +238,7 @@ function Bird(hitpoints, value, width, height, alive) {
     _this.interval = updatedBird.interval; // debugger;
 
     return updatedBird;
-  }, 10);
+  }, 20);
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Bird);
@@ -394,8 +394,8 @@ function (_React$Component) {
 
       if (this.state.round % 2 === 0) {
         this.setState({
-          hitPoints: [this.state.hitPoints += 5],
-          value: [this.state.value == 5]
+          hitPoints: this.state.hitPoints += 5,
+          value: this.state.value += 5
         });
       } else {
         this.setState({
@@ -519,7 +519,7 @@ function (_React$Component) {
         className: "store"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "status"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "money: ", this.state.money), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "health: ", this.state.health)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "money: ", this.state.money), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "acorns: ", this.state.health)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "squirrels"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "basic_squirrel",

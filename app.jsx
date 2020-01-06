@@ -25,7 +25,7 @@ class App extends React.Component {
             <div className='objective'>Objective:</div>
             <p className='description'>Protect your acorns from the hoards of hungry birds! Choose a squirrel from the store and then click anywhere in the forest to place it. 
               Your squirrels will automatically fire at the birds that are in range. Killing birds gives you more money, but be careful! The birds you fail
-              to kill will damage you!
+              to kill will steal your acorns!
             </p>
             <div className='splash-play' onClick={() => {this.setState({splash:false})}}>Play</div>
           </div>
