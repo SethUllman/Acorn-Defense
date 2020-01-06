@@ -13,6 +13,7 @@ class Game extends React.Component{
       round: 1,
       hitPoints: 1,
       value: 10,
+      speed: 20,
       alive: true,
       birds: [],
       missed: 0,
@@ -28,7 +29,7 @@ class Game extends React.Component{
     
     this.setState({birds: []});
     if (this.state.round % 2 === 0) {
-      this.setState({hitPoints: this.state.hitPoints += 5, value: this.state.value += 5});
+      this.setState({hitPoints: this.state.hitPoints += 5, value: this.state.value += 5, speed: this.state.speed -= 2});
     } else {
       this.setState({difficulty: this.state.difficulty += 5})
     }
@@ -42,7 +43,7 @@ class Game extends React.Component{
     let i = 0;
     const roundStart = setInterval(() => {
 
-      const bird = new Bird(this.state.hitPoints, this.state.value, this.props.width, this.props.height, this.state.alive);
+      const bird = new Bird(this.state.hitPoints, this.state.value, this.props.width, this.props.height, this.state.alive, this.state.speed);
       let newBirds = this.state.birds.concat(bird);
       this.setState({ birds: newBirds});
       i += 1;
@@ -50,7 +51,7 @@ class Game extends React.Component{
       const birdStatus = setInterval(() => {
         const shootTimer = setInterval(() => {
           this.shoot();
-        }, 2000)
+        }, 3000)
         for (let b = 0; b < i; b++) {
           if (this.state.birds[b]) {
             let x = this.state.birds[b].x;
@@ -98,11 +99,13 @@ class Game extends React.Component{
             newMoney += this.state.value;
             
             this.setState({birds: newBirds, money: newMoney});
+            return;
             
 
           } else {
 
             this.setState({birds: newBirds});
+            return;
 
           }
         }

@@ -222,7 +222,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _birdDraw__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./birdDraw */ "./lib/components/birdDraw.js");
 
 
-function Bird(hitpoints, value, width, height, alive) {
+function Bird(hitpoints, value, width, height, alive, speed) {
   var _this = this;
 
   this.hitpoints = hitpoints;
@@ -238,7 +238,7 @@ function Bird(hitpoints, value, width, height, alive) {
     _this.interval = updatedBird.interval; // debugger;
 
     return updatedBird;
-  }, 20);
+  }, speed);
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Bird);
@@ -373,6 +373,7 @@ function (_React$Component) {
       round: 1,
       hitPoints: 1,
       value: 10,
+      speed: 20,
       alive: true,
       birds: [],
       missed: 0,
@@ -395,7 +396,8 @@ function (_React$Component) {
       if (this.state.round % 2 === 0) {
         this.setState({
           hitPoints: this.state.hitPoints += 5,
-          value: this.state.value += 5
+          value: this.state.value += 5,
+          speed: this.state.speed -= 2
         });
       } else {
         this.setState({
@@ -415,7 +417,7 @@ function (_React$Component) {
 
       var i = 0;
       var roundStart = setInterval(function () {
-        var bird = new _bird_js__WEBPACK_IMPORTED_MODULE_2__["default"](_this2.state.hitPoints, _this2.state.value, _this2.props.width, _this2.props.height, _this2.state.alive);
+        var bird = new _bird_js__WEBPACK_IMPORTED_MODULE_2__["default"](_this2.state.hitPoints, _this2.state.value, _this2.props.width, _this2.props.height, _this2.state.alive, _this2.state.speed);
 
         var newBirds = _this2.state.birds.concat(bird);
 
@@ -427,7 +429,7 @@ function (_React$Component) {
         var birdStatus = setInterval(function () {
           var shootTimer = setInterval(function () {
             _this2.shoot();
-          }, 2000);
+          }, 3000);
 
           for (var b = 0; b < i; b++) {
             if (_this2.state.birds[b]) {
@@ -485,10 +487,12 @@ function (_React$Component) {
                 birds: newBirds,
                 money: newMoney
               });
+              return;
             } else {
               this.setState({
                 birds: newBirds
               });
+              return;
             }
           }
 
