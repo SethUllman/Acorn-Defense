@@ -154,15 +154,21 @@ function (_React$Component) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "splash"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "info"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "splash-welcome"
         }, "Acorn Defense!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "objective"
+        }, "Objective:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "description"
+        }, "Protect your acorns from the hoards of hungry birds! Choose a squirrel from the store and then click anywhere in the forest to place it. Your squirrels will automatically fire at the birds that are in range. Killing birds gives you more money, but be careful! The birds you fail to kill will damage you!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "splash-play",
           onClick: function onClick() {
             _this2.setState({
               splash: false
             });
           }
-        }, "Play"));
+        }, "Play")));
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_lib_components_game__WEBPACK_IMPORTED_MODULE_1__["default"], {
           height: this.state.height,

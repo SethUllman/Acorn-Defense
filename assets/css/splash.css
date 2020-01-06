@@ -10,12 +10,12 @@
 
 .splash-welcome{
   /* border: 1px solid red; */
-  width: 50%;
+  width: 90%;
   height: 10%;
   display: flex;
   justify-content: center;
   font-family: 'Simonetta', cursive;
-  font-size: 7vw;
+  font-size: 5vw;
   font-weight: bolder;
   margin-bottom: 40px;
 }
@@ -24,7 +24,7 @@
   margin-top: 40px;
   border: 1px solid gray;
   border-radius: 10px;
-  width: 20%;
+  width: 80%;
   height: 10%;
   display: flex;
   justify-content: center;
@@ -35,5 +35,27 @@
   z-index: 5;
 }
 
+.objective{
+  font-size: 46px;
+}
+
+.description{
+  font-size: 24px;
+  /* border: 1px solid red; */
+  width: 90%;
+}
+
+.info{
+  width: 40%;
+  height: 80%;
+  /* border: 1px solid blue; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, .5);
+  color: white;
+}
 
 

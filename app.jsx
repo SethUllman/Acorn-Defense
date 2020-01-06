@@ -20,8 +20,15 @@ class App extends React.Component {
     if(this.state.splash){
       return (
         <div className='splash'>
-          <div className='splash-welcome'>Acorn Defense!</div>
-          <div className='splash-play' onClick={() => {this.setState({splash:false})}}>Play</div>
+          <div className='info'>
+            <div className='splash-welcome'>Acorn Defense!</div>
+            <div className='objective'>Objective:</div>
+            <p className='description'>Protect your acorns from the hoards of hungry birds! Choose a squirrel from the store and then click anywhere in the forest to place it. 
+              Your squirrels will automatically fire at the birds that are in range. Killing birds gives you more money, but be careful! The birds you fail
+              to kill will damage you!
+            </p>
+            <div className='splash-play' onClick={() => {this.setState({splash:false})}}>Play</div>
+          </div>
         </div>
       )
     } else {
