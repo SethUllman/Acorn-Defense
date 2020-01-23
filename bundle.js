@@ -222,7 +222,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _birdDraw__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./birdDraw */ "./lib/components/birdDraw.js");
 
 
-function Bird(hitpoints, value, width, height, alive, speed) {
+function Bird(hitpoints, value, width, height, alive, speed, squirrels) {
   var _this = this;
 
   this.hitpoints = hitpoints;
@@ -231,7 +231,7 @@ function Bird(hitpoints, value, width, height, alive, speed) {
   this.x = -10;
   this.y = 61.5 * height / 100;
   var draw = setInterval(function () {
-    var updatedBird = Object(_birdDraw__WEBPACK_IMPORTED_MODULE_0__["default"])(_this.x, _this.y, _this.count, draw, alive);
+    var updatedBird = Object(_birdDraw__WEBPACK_IMPORTED_MODULE_0__["default"])(_this.x, _this.y, _this.count, draw, alive, squirrels);
     _this.x = updatedBird.x;
     _this.y = updatedBird.y;
     _this.count = updatedBird.count;
@@ -254,7 +254,7 @@ function Bird(hitpoints, value, width, height, alive, speed) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var birdDraw = function birdDraw(x, y, count, draw, alive) {
+var birdDraw = function birdDraw(x, y, count, draw, alive, squirrels) {
   var height = window.screen.height;
   var width = window.screen.width;
   var birdWidth = 4.5 * width / 100;
@@ -417,7 +417,7 @@ function (_React$Component) {
 
       var i = 0;
       var roundStart = setInterval(function () {
-        var bird = new _bird_js__WEBPACK_IMPORTED_MODULE_2__["default"](_this2.state.hitPoints, _this2.state.value, _this2.props.width, _this2.props.height, _this2.state.alive, _this2.state.speed);
+        var bird = new _bird_js__WEBPACK_IMPORTED_MODULE_2__["default"](_this2.state.hitPoints, _this2.state.value, _this2.props.width, _this2.props.height, _this2.state.alive, _this2.state.speed, _this2.state.squirrels);
 
         var newBirds = _this2.state.birds.concat(bird);
 
@@ -427,10 +427,11 @@ function (_React$Component) {
 
         i += 1;
         var birdStatus = setInterval(function () {
-          var shootTimer = setInterval(function () {
-            _this2.shoot();
-          }, 3000);
-
+          // const shootTimer = setInterval(() => {
+          //   this.state.squirrels.forEach(squirrel => {
+          //     this.shoot(squirrel);
+          //   });
+          // }, 3000)
           for (var b = 0; b < i; b++) {
             if (_this2.state.birds[b]) {
               var x = _this2.state.birds[b].x;
@@ -462,42 +463,37 @@ function (_React$Component) {
     }
   }, {
     key: "shoot",
-    value: function shoot() {
-      for (var i = 0; i < this.state.squirrels.length; i++) {
-        var current = this.state.squirrels[i];
+    value: function shoot(squirrel) {
+      for (var j = 0; j < this.state.birds.length; j++) {
+        var bird = this.state.birds[j];
 
-        for (var j = 0; j < this.state.birds.length; j++) {
-          var bird = this.state.birds[j];
+        if (bird.x < squirrel.x + 200 && bird.x > squirrel.x - 200 & bird.y < squirrel.y + 200 && bird.y > squirrel.y - 200) {
+          var newBirds = this.state.birds;
+          newBirds[j].hitpoints -= 1;
 
-          if (bird.x < current.x + 200 && bird.x > current.x - 200 & bird.y < current.y + 200 && bird.y > current.y - 200) {
-            var newBirds = this.state.birds;
-            newBirds[j].hitpoints -= 1;
+          if (newBirds[j].hitpoints === 0) {
+            newBirds.splice(j, 1);
+            var newMoney = this.state.money;
 
-            if (newBirds[j].hitpoints === 0) {
-              newBirds.splice(j, 1);
-              console.log(this.state.money);
-              var newMoney = this.state.money;
-
-              if (Array.isArray(newMoney)) {
-                newMoney = newMoney[0];
-              }
-
-              newMoney += this.state.value;
-              this.setState({
-                birds: newBirds,
-                money: newMoney
-              });
-              return;
-            } else {
-              this.setState({
-                birds: newBirds
-              });
-              return;
+            if (Array.isArray(newMoney)) {
+              newMoney = newMoney[0];
             }
-          }
 
-          if (i === this.state.squirrels.length + 1 && j === this.state.birds.length + 1) {}
+            newMoney += this.state.value;
+            console.log('Shoot!');
+            this.setState({
+              birds: newBirds,
+              money: newMoney
+            });
+          } else {
+            this.setState({
+              birds: newBirds
+            });
+            return;
+          }
         }
+
+        if (i === this.state.squirrels.length + 1 && j === this.state.birds.length + 1) {}
       }
     }
   }, {

@@ -43,15 +43,17 @@ class Game extends React.Component{
     let i = 0;
     const roundStart = setInterval(() => {
 
-      const bird = new Bird(this.state.hitPoints, this.state.value, this.props.width, this.props.height, this.state.alive, this.state.speed);
+      const bird = new Bird(this.state.hitPoints, this.state.value, this.props.width, this.props.height, this.state.alive, this.state.speed, this.state.squirrels);
       let newBirds = this.state.birds.concat(bird);
       this.setState({ birds: newBirds});
       i += 1;
       
       const birdStatus = setInterval(() => {
-        const shootTimer = setInterval(() => {
-          this.shoot();
-        }, 3000)
+        // const shootTimer = setInterval(() => {
+        //   this.state.squirrels.forEach(squirrel => {
+        //     this.shoot(squirrel);
+        //   });
+        // }, 3000)
         for (let b = 0; b < i; b++) {
           if (this.state.birds[b]) {
             let x = this.state.birds[b].x;
@@ -76,42 +78,37 @@ class Game extends React.Component{
     }, 1000);
   }
 
-  shoot(){
-    for(let i = 0; i < this.state.squirrels.length; i++){
+  shoot(squirrel){
+    for(let j = 0; j < this.state.birds.length; j++){
 
-      let current = this.state.squirrels[i];
-      for(let j = 0; j < this.state.birds.length; j++){
+      let bird = this.state.birds[j];
+      if(bird.x < squirrel.x + 200 && bird.x > squirrel.x - 200 & bird.y < squirrel.y + 200 && bird.y > squirrel.y - 200){
 
-        let bird = this.state.birds[j];
-        if(bird.x < current.x + 200 && bird.x > current.x - 200 & bird.y < current.y + 200 && bird.y > current.y - 200){
+        let newBirds = this.state.birds;
+        newBirds[j].hitpoints -= 1;
+        if (newBirds[j].hitpoints === 0){
 
-          let newBirds = this.state.birds;
-          newBirds[j].hitpoints -= 1;
-          if (newBirds[j].hitpoints === 0){
-
-            
-            newBirds.splice(j, 1);
-            console.log(this.state.money);
-            let newMoney = this.state.money;
-            if (Array.isArray(newMoney)){
-              newMoney = newMoney[0];
-            }
-            newMoney += this.state.value;
-            
-            this.setState({birds: newBirds, money: newMoney});
-            return;
-            
-
-          } else {
-
-            this.setState({birds: newBirds});
-            return;
-
+          
+          newBirds.splice(j, 1);
+          let newMoney = this.state.money;
+          if (Array.isArray(newMoney)){
+            newMoney = newMoney[0];
           }
+          newMoney += this.state.value;
+          console.log('Shoot!');
+          this.setState({birds: newBirds, money: newMoney});
+          
+          
+
+        } else {
+
+          this.setState({birds: newBirds});
+          return;
+
         }
-        if (i === this.state.squirrels.length + 1 && j === this.state.birds.length + 1){
-        
-        }
+      }
+      if (i === this.state.squirrels.length + 1 && j === this.state.birds.length + 1){
+      
       }
     }
   }

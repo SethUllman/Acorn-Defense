@@ -1,9 +1,10 @@
 {
-  "name": "Tower-Defense",
+  "name": "tower-defense",
   "version": "1.0.0",
   "description": "Tower Defense is a game where you prevent the balloons from reaching the end of the track by purchasing towers to pop them.",
   "main": "index.jsx",
   "scripts": {
+
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack --mode=development --watch"
   },
