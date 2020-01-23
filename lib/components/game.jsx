@@ -95,7 +95,6 @@ class Game extends React.Component{
             newMoney = newMoney[0];
           }
           newMoney += this.state.value;
-          console.log('Shoot!');
           this.setState({birds: newBirds, money: newMoney});
           
           
