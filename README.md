@@ -17,14 +17,6 @@ Live Link: In Development
 
 - Canvas Api
 
-## To-Do
-
-Day 1: Functional splash page and game start, balloons get stronger over time
-
-Day 2: Towers can be purchased, placed, and can shoot balloons
-
-Day 3: Towers can be upgraded
-
 ## Wire Frames
 
 Game splash page
